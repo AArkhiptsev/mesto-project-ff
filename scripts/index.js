@@ -23,7 +23,7 @@ function deleteCard(deleteButton) {
 // @todo: Вывести карточки на страницу
 function renderCards() {
   initialCards.forEach((card) => {
-    cardsContainer.append(createCard(card,deleteCard));
+    cardsContainer.append(createCard(card, deleteCard));
   });
 }
 

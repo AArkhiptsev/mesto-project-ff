@@ -1,5 +1,4 @@
-import { openModal } from "./modal";
-import { setLikeCard } from "../../index.js";
+import { setLikeCard, openPopupImage } from "../../index.js";
 
 const cardTemplate = document.querySelector("#card-template").content;
 export const cardsContainer = document.querySelector(".places__list");
@@ -32,18 +31,10 @@ export function deleteCard(cardElement) {
   cardElement.remove();
 }
 
+//Функция добавления карточки
 export function addNewCard(card) {
   cardsContainer.insertBefore(
     createCard(card, deleteCard),
     cardsContainer.firstChild
   );
-}
-
-function openPopupImage(alt, src) {
-  const popupImageForm = document.querySelector(".popup_type_image");
-  popupImageForm.querySelector(".popup__image").src = src;
-  popupImageForm.querySelector(".popup__caption").textContent = alt;
-  popupImageForm.querySelector(".popup__image").alt = alt;
-
-  openModal(popupImageForm);
 }

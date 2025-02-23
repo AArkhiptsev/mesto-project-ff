@@ -26,15 +26,4 @@ export function createCard(card, deleteCard, isLiked) {
   return cardElement;
 }
 
-//Функция удаления карточки
-export function deleteCard(cardElement) {
-  cardElement.remove();
-}
 
-//Функция добавления карточки
-export function addNewCard(card) {
-  cardsContainer.insertBefore(
-    createCard(card, deleteCard),
-    cardsContainer.firstChild
-  );
-}

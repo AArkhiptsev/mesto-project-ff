@@ -1,12 +1,10 @@
 import {
   createCard,
-  deleteCard,
   cardsContainer,
 } from "./scripts/components/card.js";
 import {
   openModal,
   closeModal,
-  handleFormSubmit,
 } from "./scripts/components/modal.js";
 import { initialCards } from "./scripts/components/cards.js";
 
@@ -28,6 +26,32 @@ export const profileForm = popupForm.querySelector(".popup__input_type_name");
 export const popupFormDescription = popupForm.querySelector(
   ".popup__input_type_description"
 );
+
+export function handlePressKey(event) {
+  if (event.key === "Escape") {
+    const isOpened = document.querySelector(".popup_is-opened");
+    if (isOpened != null) closeModal(isOpened);
+  }
+}
+
+export function handleFormSubmit(evt) {
+  evt.preventDefault();
+
+  if (evt.srcElement[0].classList.contains("popup__input_type_name")) {
+    document.querySelector(".profile__title").textContent = profileForm.value;
+    document.querySelector(".profile__description").textContent =
+      popupFormDescription.value;
+  } else {
+    let card = {
+      name: document.querySelector(".popup__input_type_card-name").value,
+      link: document.querySelector(".popup__input_type_url").value,
+      alt: document.querySelector(".popup__input_type_card-name").value,
+    };
+    addNewCard(card);
+  }
+  closeModal(document.querySelector(".popup_is-opened"));
+}
+
 
 //Вывести карточки на страницу
 function renderCards() {
@@ -54,6 +78,20 @@ export function openPopupImage(alt, src) {
 export function editUser(modal) {
   loadPopupData();
   openModal(modal);
+}
+
+
+//Функция добавления карточки
+export function addNewCard(card) {
+  cardsContainer.insertBefore(
+    createCard(card, deleteCard),
+    cardsContainer.firstChild
+  );
+}
+
+//Функция удаления карточки
+export function deleteCard(cardElement) {
+  cardElement.remove();
 }
 
 function loadPopupData() {

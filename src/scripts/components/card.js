@@ -25,5 +25,3 @@ export function createCard(card, deleteCard, isLiked) {
   removeButton.addEventListener("click", () => deleteCard(cardElement));
   return cardElement;
 }
-
-

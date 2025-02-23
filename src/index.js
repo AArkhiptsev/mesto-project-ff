@@ -1,11 +1,5 @@
-import {
-  createCard,
-  cardsContainer,
-} from "./scripts/components/card.js";
-import {
-  openModal,
-  closeModal,
-} from "./scripts/components/modal.js";
+import { createCard, cardsContainer } from "./scripts/components/card.js";
+import { openModal, closeModal } from "./scripts/components/modal.js";
 import { initialCards } from "./scripts/components/cards.js";
 
 import "./pages/index.css";
@@ -52,7 +46,6 @@ export function handleFormSubmit(evt) {
   closeModal(document.querySelector(".popup_is-opened"));
 }
 
-
 //Вывести карточки на страницу
 function renderCards() {
   initialCards.forEach((card) => {
@@ -79,7 +72,6 @@ export function editUser(modal) {
   loadPopupData();
   openModal(modal);
 }
-
 
 //Функция добавления карточки
 export function addNewCard(card) {

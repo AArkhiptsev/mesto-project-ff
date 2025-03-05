@@ -64,6 +64,6 @@ export const postCard = ({ name, link }) => {
 export const deleteCardAPI = (cardId) => {
   return fetch(`${CONFIG.baseUrl}/cards/${cardId}`, {
     headers: CONFIG.headers,
-    method: 'DELETE',
+    method: "DELETE",
   }).then(handleResponse);
 };

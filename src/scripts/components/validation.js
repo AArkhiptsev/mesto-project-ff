@@ -24,7 +24,7 @@ const checkInputValidity = (formElement, inputElement) => {
       showInputError(
         formElement,
         inputElement,
-        inputElement.getAttribute('data-error-message')
+        inputElement.getAttribute("data-error-message")
       );
     } else {
       hideInputError(formElement, inputElement);

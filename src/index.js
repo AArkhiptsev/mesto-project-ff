@@ -1,4 +1,4 @@
-import { createCard, cardsContainer } from "./scripts/components/card.js";
+import { createCard } from "./scripts/components/card.js";
 import { openModal, closeModal } from "./scripts/components/modal.js";
 import { enableValidation } from "./scripts/components/validation.js";
 import {
@@ -17,6 +17,7 @@ const popupNewCard = document.querySelector(".popup_type_new-card");
 const popupImage = document.querySelector(".popup_type_image");
 const popupAvatar = document.querySelector(".popup_type_edit-avatar");
 
+const cardsContainer = document.querySelector(".places__list");
 
 const popupEditButton = document.querySelector(".profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");

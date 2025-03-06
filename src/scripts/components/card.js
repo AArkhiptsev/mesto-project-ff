@@ -1,7 +1,5 @@
-import { setLikeCard, openPopupImage } from "../../index.js";
-
 const cardTemplate = document.querySelector("#card-template").content;
-export const cardsContainer = document.querySelector(".places__list");
+
 
 //Функция создания карточки
 export function createCard(card, deleteCard, isLiked, currentUserId) {
@@ -16,9 +14,9 @@ export function createCard(card, deleteCard, isLiked, currentUserId) {
     likeCounter.textContent = card.likes.length;
   }
 
-  cardElement.querySelector(".card__image").src = card.link;
-  cardElement.querySelector(".card__image").alt = card.alt;
-  cardElement.querySelector(".card__title").textContent = card.name;
+  cardImage.src = card.link;
+  cardImage.alt = card.alt;
+  cardImage.textContent = card.name;
 
   if (isLiked) likeButton.classList.add("card__like-button_is-active");
   else likeButton.classList.remove("card__like-button_is-active");

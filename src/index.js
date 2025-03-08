@@ -4,18 +4,9 @@ import {closeModal, openModal, handleModalClick} from './scripts/modal.js';
 
 import {createCard as createCardDOM } from './scripts/card.js';
 
-import {getInitialCards, getUserInfo, updateUserAvatar, updateUserInfo, likeCard, unLikeCard, postCard,  deleteCard} from './scripts/api.js';
+import {getInitialCards, getUserInfo, updateUserAvatar, updateUserInfo, likeCard, unLikeCard, postCard, deleteCard} from './scripts/api.js';
 
-import { clearValidation, enableValidation } from './scripts/validation.js';
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-};
+import {clearValidation, enableValidation, validationConfig} from './scripts/validation.js';
 
 //DOM элементы
 const popupImage = document.querySelector('.popup_type_image');
@@ -103,7 +94,7 @@ const handleCardLike = ({ cardId, buttonElement, counterElement }) => {
   }
 };
 
-const handleCardDelete = ({ cardId, buttonElement }) => {
+const handleCardDelete = ({cardId, buttonElement}) => {
   openModal(popupConfirm);
   popupConfirmButton.onclick = () => {
     buttonElement.disabled = true;
@@ -234,7 +225,7 @@ const handlePopupCardButtonOpenClick = () => {
   openModal(popupCard);
 };
 
-const handleCardImageClick = ({ cardName, cardLink }) => {
+const handleCardImageClick = ({cardName, cardLink}) => {
   popupImageImage.src = cardLink;
   popupImageImage.alt = cardName;
   popupImageCaption.textContent = cardName;
@@ -250,15 +241,18 @@ const handleProfileImageClick = () => {
   openModal(popupProfileImage);
 };
 
+//Слушатели
+
 cardForm.addEventListener('submit', handleCardFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 profileImageForm.addEventListener('submit', handleProfileImageFormSubmit);
+
 popupImage.addEventListener('click', handleModalClick);
 popupProfileImage.addEventListener('click', handleModalClick);
 profileImage.addEventListener('click', handleProfileImageClick);
+
 popupCard.addEventListener('click', handleModalClick);
 popupCardButtonOpen.addEventListener('click', handlePopupCardButtonOpenClick);
-
 popupProfile.addEventListener('click', handleModalClick);
 popupProfileButtonOpen.addEventListener(
   'click',
@@ -270,7 +264,7 @@ popupConfirm.addEventListener('click', handleModalClick);
 enableValidation(validationConfig);
 
 Promise.all([getUserInfo(), getInitialCards()])
-  .then(([{ name, about, avatar, ['_id']: currentUserId }, cardsData]) => {
+  .then(([{ name, about, avatar, _id: currentUserId }, cardsData]) => {
     setProfile({
       name,
       description: about,

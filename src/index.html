@@ -12,8 +12,7 @@
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
-        <img src=<%=require("./images/logo.svg")%> alt="Логотип проекта место"
-        class="logo header__logo" />
+        <img src=<%=require("./images/logo.svg")%> alt="Логотип проекта место" class="logo header__logo" />
       </header>
       <main class="content">
         <section class="profile page__section">
@@ -45,7 +44,7 @@
               id="name-input"
               minlength="2"
               maxlength="40"
-              pattern="[A-Za-zА-Яа-яЁё]+([\s\-][A-Za-zА-Яа-яЁё]+)*"
+              pattern="[A-Za-zА-Яа-яёЁ\- ]+"
               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               required
             />
@@ -59,7 +58,7 @@
               id="description-input"
               minlength="2"
               maxlength="200"
-              pattern="[A-Za-zА-Яа-яЁё]+([\s\-][A-Za-zА-Яа-яЁё]+)*"
+              pattern="[A-Za-zА-Яа-яёЁ\- ]+"
               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               required
             />
@@ -104,7 +103,7 @@
               id="place-name-input"
               minlength="2"
               maxlength="30"
-              pattern="[A-Za-zА-Яа-яЁё]+([\s\-][A-Za-zА-Яа-яЁё]+)*"
+              pattern="[A-Za-zА-Яа-яёЁ\- ]+"
               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               required
             />

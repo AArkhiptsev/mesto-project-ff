@@ -1,7 +1,15 @@
 
+export const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
 const showInputError = ({formElement, inputElement, inputErrorClass, errorClass, errorMessage}) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
   errorElement.classList.add(errorClass);
   errorElement.textContent = errorMessage;
 
@@ -10,7 +18,6 @@ const showInputError = ({formElement, inputElement, inputErrorClass, errorClass,
 
 const hideInputError = ({formElement, inputElement, inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 
@@ -59,7 +66,7 @@ const setEventListeners = ({formElement, inputSelector, inputErrorClass, submitB
   });
 };
 
-export const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass,  errorClass}) => {
+export const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
   const formList = document.querySelectorAll(formSelector);
 
   formList.forEach((formElement) => {

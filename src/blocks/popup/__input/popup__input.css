@@ -21,15 +21,12 @@
   }
 }
 
-.popup__input_type_error {
-  border-color: red;
-}
-
-.popup__input-error_active {
+.popup__error {
   color: red;
   font-size: 12px;
   font-weight: 400;
 }
+
 
 .popup__input:focus {
   outline: none;

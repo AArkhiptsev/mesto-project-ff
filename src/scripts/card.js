@@ -1,4 +1,4 @@
-export const createCard = ({currentUserId, template, data, delButton, onLike, imageClick}) => {
+export const createCardDOM = ({currentUserId, template, data, delButton, onLike, imageClick}) => {
   
   const element = template.querySelector('.card').cloneNode(true);
   const image = element.querySelector('.card__image');

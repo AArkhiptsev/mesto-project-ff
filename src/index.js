@@ -1,63 +1,49 @@
-import "./pages/index.css";
+import './pages/index.css';
 
-import { closeModal, openModal, handleModalClick } from "./scripts/modal.js";
+import {closeModal, openModal, handleModalClick} from './scripts/modal.js';
 
-import { createCardDOM } from "./scripts/card.js";
+import {createCardDOM } from './scripts/card.js';
 
-import {
-  getInitialCards,
-  getUserInfo,
-  updateUserAvatar,
-  updateUserInfo,
-  likeCard,
-  unLikeCard,
-  postCard,
-  deleteCard,
-} from "./scripts/api.js";
+import {getInitialCards, getUserInfo, updateUserAvatar, updateUserInfo, likeCard, unLikeCard, postCard, deleteCard} from './scripts/api.js';
 
-import {
-  clearValidation,
-  enableValidation,
-  validationConfig,
-} from "./scripts/validation.js";
+import {clearValidation, enableValidation, validationConfig} from './scripts/validation.js';
 
 //DOM элементы
-const popupImage = document.querySelector(".popup_type_image");
-const popupImageCaption = popupImage.querySelector(".popup__caption");
-const popupImageImage = popupImage.querySelector(".popup__image");
+const popupImage = document.querySelector('.popup_type_image');
+const popupImageCaption = popupImage.querySelector('.popup__caption');
+const popupImageImage = popupImage.querySelector('.popup__image');
 
-const cardsContainer = document.querySelector(".places__list");
+const cardsContainer = document.querySelector('.places__list');
 
-const cardTemplate = document.querySelector("#card-template").content;
-const cardForm = document.forms["new-place"];
-const cardFormSubmitButton = cardForm.querySelector(".popup__button");
-const cardNameInput = cardForm.elements["place-name"];
+const cardTemplate = document.querySelector('#card-template').content;
+const cardForm = document.forms['new-place'];
+const cardFormSubmitButton = cardForm.querySelector('.popup__button');
+const cardNameInput = cardForm.elements['place-name'];
 const cardLinkInput = cardForm.elements.link;
 
-const popupCard = document.querySelector(".popup_type_new-card");
-const popupCardButtonOpen = document.querySelector(".profile__add-button");
+const popupCard = document.querySelector('.popup_type_new-card');
+const popupCardButtonOpen = document.querySelector('.profile__add-button');
 
-const profileImageForm = document.forms["edit-avatar"];
+const profileImageForm = document.forms['edit-avatar'];
 const profileImageInput = profileImageForm.elements.avatar;
-const profileImageFormSubmitButton =
-  profileImageForm.querySelector(".popup__button");
+const profileImageFormSubmitButton = profileImageForm.querySelector('.popup__button');
 
-const popupProfileImage = document.querySelector(".popup_type_edit-avatar");
+const popupProfileImage = document.querySelector('.popup_type_edit-avatar');
 
-const profileImage = document.querySelector(".profile__image");
-const profileName = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
+const profileImage = document.querySelector('.profile__image');
+const profileName = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
 
-const profileForm = document.forms["edit-profile"];
-const profileFormSubmitButton = profileForm.querySelector(".popup__button");
+const profileForm = document.forms['edit-profile'];
+const profileFormSubmitButton = profileForm.querySelector('.popup__button');
 const profileNameInput = profileForm.elements.name;
 const profileDescriptionInput = profileForm.elements.description;
 
-const popupProfile = document.querySelector(".popup_type_edit");
-const popupProfileButtonOpen = document.querySelector(".profile__edit-button");
+const popupProfile = document.querySelector('.popup_type_edit');
+const popupProfileButtonOpen = document.querySelector('.profile__edit-button');
 
-const popupConfirm = document.querySelector(".popup_type_confirm");
-const popupConfirmButton = popupConfirm.querySelector(".popup__button_confirm");
+const popupConfirm = document.querySelector('.popup_type_confirm');
+const popupConfirmButton = popupConfirm.querySelector('.popup__button_confirm');
 
 const setProfile = ({ name, description, avatar }) => {
   profileName.textContent = name;
@@ -67,26 +53,36 @@ const setProfile = ({ name, description, avatar }) => {
 
 const renderLoading = ({ buttonElement, isLoading }) => {
   if (isLoading) {
-    buttonElement.textContent = "Сохранение...";
+    buttonElement.textContent = 'Сохранение...';
   } else {
-    buttonElement.textContent = "Сохранить";
+    buttonElement.textContent = 'Сохранить';
   }
 };
 
 const handleCardLike = ({ cardId, buttonElement, counterElement }) => {
   buttonElement.disabled = true;
 
-  if (buttonElement.classList.contains("card__like-button_is-active")) {
+  if (buttonElement.classList.contains('card__like-button_is-active')) {
     unLikeCard(cardId)
       .then(({ likes }) => {
-        buttonElement.classList.remove("card__like-button_is-active");
+        buttonElement.classList.remove('card__like-button_is-active');
 
-        if (likes.length) {
-          counterElement.classList.add("card__like-counter_is-active");
+        if (likes.length) { /* В задании есть like и unlike? В комментариях к пректу необходимо блокировать кнопку like, 
+          если пользователь "дизлайкнул карточку". Что имеется ввиду? 
+          Сейчас логика такая: лайк кликнули: запрос серверу отправили, цифру количества количества лайков обновили, сердечко закрасили. 
+          Сняли лайк: соответветсвенно запрос отправили, количество лайков уменьшили, сердечко сделали не закрашенным. 
+          а дизлайк с блокированием в этой логике куда?
+          Если речь идет о сердечке, то оно не может быть неактивным. Если лайк не установлен пользователем, то у него есть возможность его поставить, 
+          а если уже поставлен лайк, то есть возможность его снять. Непонятно, что надо.
+
+          Написал тоже самое наставнику - ответа непоследовало.
+          Прошу пояснить или зачесть работу, т.к. мне послезавтра улетать */ 
+
+          counterElement.classList.add('card__like-counter_is-active');
           counterElement.textContent = likes.length;
         } else {
-          counterElement.classList.remove("card__like-counter_is-active");
-          counterElement.textContent = "";
+          counterElement.classList.remove('card__like-counter_is-active');
+          counterElement.textContent = '';
         }
       })
       .catch((error) => console.error(error))
@@ -96,9 +92,9 @@ const handleCardLike = ({ cardId, buttonElement, counterElement }) => {
   } else {
     likeCard(cardId)
       .then(({ likes }) => {
-        buttonElement.classList.add("card__like-button_is-active");
+        buttonElement.classList.add('card__like-button_is-active');
 
-        counterElement.classList.add("card__like-counter_is-active");
+        counterElement.classList.add('card__like-counter_is-active');
         counterElement.textContent = likes.length;
       })
       .catch((error) => console.error(error))
@@ -235,7 +231,7 @@ const handlePopupCardButtonOpenClick = () => {
   openModal(popupCard);
 };
 
-const handleCardImageClick = ({ cardName, cardLink }) => {
+const handleCardImageClick = ({cardName, cardLink}) => {
   popupImageImage.src = cardLink;
   popupImageImage.alt = cardName;
   popupImageCaption.textContent = cardName;
@@ -253,23 +249,23 @@ const handleProfileImageClick = () => {
 
 //Слушатели
 
-cardForm.addEventListener("submit", handleCardFormSubmit);
-profileForm.addEventListener("submit", handleProfileFormSubmit);
-profileImageForm.addEventListener("submit", handleProfileImageFormSubmit);
+cardForm.addEventListener('submit', handleCardFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
+profileImageForm.addEventListener('submit', handleProfileImageFormSubmit);
 
-popupImage.addEventListener("click", handleModalClick);
-popupProfileImage.addEventListener("click", handleModalClick);
-profileImage.addEventListener("click", handleProfileImageClick);
+popupImage.addEventListener('click', handleModalClick);
+popupProfileImage.addEventListener('click', handleModalClick);
+profileImage.addEventListener('click', handleProfileImageClick);
 
-popupCard.addEventListener("click", handleModalClick);
-popupCardButtonOpen.addEventListener("click", handlePopupCardButtonOpenClick);
-popupProfile.addEventListener("click", handleModalClick);
+popupCard.addEventListener('click', handleModalClick);
+popupCardButtonOpen.addEventListener('click', handlePopupCardButtonOpenClick);
+popupProfile.addEventListener('click', handleModalClick);
 popupProfileButtonOpen.addEventListener(
-  "click",
+  'click',
   handlePopupProfileButtonOpenClick
 );
 
-popupConfirm.addEventListener("click", handleModalClick);
+popupConfirm.addEventListener('click', handleModalClick);
 
 enableValidation(validationConfig);
 
